@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+
+{% block title %}信息-热点{% endblock %}
+
+{% block content %}
+{%for key in  result_list %}
+<p>
+	<a href="{{result_list[key]}}">{{key}}</a>
+</p>
+{% endfor %}
+{% endblock %}
