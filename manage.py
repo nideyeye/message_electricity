@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 import logging 
 from flask_script import Manager
-
+from spiders import Beijixin, StateGrid
 
 app = Flask(__name__)
 manager = Manager(app)
