@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+{% for i in result %}
+<a href={{result[i]}}>{{i}}</a><br>
+{% endfor %}
+</div>
+{% endblock %}

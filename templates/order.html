@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+{% for item in result %}
+	<p>状态：{{item['status']}}</p>
+	<a href={{item['url']}}>项目名称：{{item['title']}}</a>
+	<p>时间：{{item['date']}}</p><br>
+{% endfor %}
+</div>
+{% endblock %}

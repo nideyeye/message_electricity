@@ -4,9 +4,9 @@ import requests, re
 import logging
 from bs4 import BeautifulSoup
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s')
 
-class SpiderStateGrid():
+class StateGrid():
     def __init__(self):
         self.main_url = 'http://ecp.sgcc.com.cn/project_list.jsp?site=global&column_code=014001001&project_type=1&company_id=&status=&project_name=&pageNo='
         self.headers = {'User-Agent ': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
@@ -45,13 +45,15 @@ class SpiderStateGrid():
             return info_list
         except:
             logging.error('解析错误，无法解析网页', exc_info=True)
-    def main(self,page=None):
+            
+    def run(self,page=None):
         logging.debug(page)
         logging.info('程序开始执行')
         response = self.get_page(page)
         logging.info('网页爬取完毕开始分析')
-        self.parse_web(response)
+        result = self.parse_web(response)
         logging.info('任务执行完毕')
+        return result
 if __name__ == "__main__":
-    test = SpiderStateGrid()
-    test.main(3)
+    test = StateGrid()
+    print(test.run())
