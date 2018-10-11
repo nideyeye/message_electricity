@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "message.html" %}
 
 {% block content %}
 {{ super() }}
@@ -9,4 +9,6 @@
 	<p>时间：{{item['date']}}</p><br>
 {% endfor %}
 </div>
+<a href={{ url_for('order', page=before_page) }}>上一页</a>
+<a href={{ url_for('order', page=next_page) }}>下一页</a>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 import logging 
 from flask_script import Manager, Server
@@ -15,13 +15,28 @@ order_spider = StateGrid()
 @app.route('/')
 def index():
     return render_template('index.html')
+    
+    
 @app.route('/hot')
-def hot():
-    return render_template('hot.html', result=hot_spier.run())
+def hot_302():
+    return redirect(url_for('hot', page=1))
+@app.route('/hot/<page>')
+def hot(page):
+    page = int(page)
+    if page == None:
+        page = 1
+    return render_template('hot.html', result=hot_spier.run(page), before_page = str(page-1) if page >1 else '1', next_page = str(page+1))
+    
     
 @app.route('/order')
-def order():
-    return render_template('order.html', result=order_spider.run())
+def order_302():
+    return redirect(url_for('order', page=1))
+@app.route('/order/<page>')
+def order(page):
+    page = int(page)
+    if page == None:
+        page = 1
+    return render_template('order.html', result=order_spider.run(page), before_page = str(page-1) if page >1 else '1', next_page = str(page+1))
 if __name__ == '__main__':
     manager.run()
     #app.run(debug=True)
